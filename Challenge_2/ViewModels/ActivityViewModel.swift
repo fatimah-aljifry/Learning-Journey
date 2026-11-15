@@ -18,10 +18,11 @@ final class ActivityViewModel {
     @ObservationIgnored private let store: LearningStore
     @ObservationIgnored private let calendar: Calendar
 
-    init(store: LearningStore, calendar: Calendar = .current, now: Date = .now) {
+    /// `now` is only passed by tests; the app uses `AppClock.shared.now`.
+    init(store: LearningStore, calendar: Calendar = .current, now: Date? = nil) {
         self.store = store
         self.calendar = calendar
-        self.now = now
+        self.now = now ?? AppClock.shared.now
     }
 
     // MARK: - Header and week strip
@@ -37,7 +38,7 @@ final class ActivityViewModel {
         return (0..<7).compactMap { calendar.date(byAdding: .day, value: $0, to: weekStart) }
     }
 
-    /// How a day appears in the week strip (learned wins over frozen).
+    /// How a day appears in the week strip (the most recent log of that day).
     func status(for date: Date) -> DayStatus? {
         store.status(for: date)
     }
@@ -71,19 +72,21 @@ final class ActivityViewModel {
     // MARK: - Actions
 
     /// `date` defaults to the real current time; passing a date lets the rules be checked with made-up times.
-    func logLearned(at date: Date = .now) {
+    func logLearned(at date: Date? = nil) {
         refresh(at: date)
-        store.log(.learned, now: date)
+        store.log(.learned, now: now)
     }
 
-    func freezeToday(at date: Date = .now) {
+    func freezeToday(at date: Date? = nil) {
         refresh(at: date)
-        store.log(.frozen, now: date)
+        store.log(.frozen, now: now)
     }
 
     /// Moves the screen to the current time and applies the 32-hour rule.
     /// Called on appear, when the app returns to the foreground, and at `nextRefreshDate`.
-    func refresh(at date: Date = .now) {
+    /// `date` defaults to the app clock (real time, or shifted time when time-travelling in Debug).
+    func refresh(at date: Date? = nil) {
+        let date = date ?? AppClock.shared.now
         now = date
         store.checkStreak(now: date)
     }

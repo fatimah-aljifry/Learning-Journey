@@ -23,22 +23,21 @@ struct DayCircle: View {
             .accessibilityLabel(accessibilityText)
     }
 
-    // Today is always solid orange (as in the hi-fi); other days are tinted by how they were logged.
+    // A logged day shows how it was logged (today included).
+    // Today is solid orange only while it isn't logged yet.
     private var backgroundColor: Color {
-        if isToday { return .orange }
         switch status {
-        case .learned: return .orange.opacity(0.15)
-        case .frozen: return .cyan.opacity(0.15)
-        case nil: return .clear
+        case .learned: .orange.opacity(0.15)
+        case .frozen: .cyan.opacity(0.15)
+        case nil: isToday ? .orange : .clear
         }
     }
 
     private var textColor: Color {
-        if isToday { return .white }
         switch status {
-        case .learned: return .orange
-        case .frozen: return .cyan
-        case nil: return .white
+        case .learned: .orange
+        case .frozen: .cyan
+        case nil: .white
         }
     }
 

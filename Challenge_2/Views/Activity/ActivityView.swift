@@ -40,10 +40,11 @@ struct ActivityView: View {
         .background(.black)
         // Keeps the screen current while it's open: refreshes now, then sleeps until
         // the next midnight or streak deadline, wakes up, refreshes again, and repeats.
-        .task {
+        // `id:` restarts the loop right away if the app clock is moved (DEBUG: time travel).
+        .task(id: AppClock.shared.offset) {
             while !Task.isCancelled {
                 viewModel.refresh()
-                let wait = viewModel.nextRefreshDate.timeIntervalSinceNow
+                let wait = viewModel.nextRefreshDate.timeIntervalSince(AppClock.shared.now)
                 try? await Task.sleep(for: .seconds(max(1, wait)))
             }
         }
@@ -66,9 +67,12 @@ struct ActivityView: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    // DEBUG: time travel — long-press opens the panel (does nothing in App Store builds).
+                    .timeTravelOnLongPress()
 
-                HeaderIconButton(title: "Edit learning goal", systemImage: "pencil.and.outline", action: onEditGoal)
+                // Order matches the hi-fi: 📅 then ✎.
                 HeaderIconButton(title: "Calendar", systemImage: "calendar", action: onOpenCalendar)
+                HeaderIconButton(title: "Edit learning goal", systemImage: "pencil.and.outline", action: onEditGoal)
             }
 
             Text(viewModel.headerDate)

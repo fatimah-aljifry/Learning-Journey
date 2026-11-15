@@ -36,12 +36,12 @@ final class LearningStore {
     var registrationDate: Date? { data.registrationDate }
 
     /// How a given day was logged, or `nil` if it wasn't. Used by the week strip and the Calendar.
-    /// If the day has two logs (goal updated in between), learned wins over frozen.
+    /// If the day has two logs (the goal was updated and the user logged again), the most recent one shows.
     func status(for date: Date) -> DayStatus? {
-        let dayLogs = data.logs.filter { calendar.isDate($0.day, inSameDayAs: date) }
-        if dayLogs.contains(where: { $0.status == .learned }) { return .learned }
-        if dayLogs.contains(where: { $0.status == .frozen }) { return .frozen }
-        return nil
+        data.logs
+            .filter { calendar.isDate($0.day, inSameDayAs: date) }
+            .max { $0.loggedAt < $1.loggedAt }?
+            .status
     }
 
     /// How today was logged *for the current goal*, or `nil` if the user can still log today.
@@ -78,17 +78,29 @@ final class LearningStore {
         lastActivity.map { $0.addingTimeInterval(Self.streakTimeout) }
     }
 
+    /// Days of the current goal that have a log for this goal (learned + frozen).
+    /// Logs made before the goal started (e.g. before a goal update) don't count.
+    var loggedDaysInGoal: Int {
+        guard let goal = data.goal else { return 0 }
+        let endDate = goal.endDate(calendar: calendar)
+        let days = data.logs
+            .filter { $0.loggedAt >= goal.startDate && $0.day < endDate }
+            .map(\.day)
+        return Set(days).count
+    }
+
     /// Whether the goal is still running, was completed, or was missed.
     ///
-    /// - `.completed` as soon as streak days + freeze days equals the goal's length in days
-    ///   (e.g. 7 for a week). Since there is one log per day per goal, this happens on the last day's log,
-    ///   so "Well done!" shows right away.
-    /// - `.missed` at midnight after the last day if that total wasn't reached.
+    /// - `.completed` as soon as logged days + frozen days within the goal equals the goal's length
+    ///   (e.g. 7 for a week): every day of the goal has a log. Since there is one log per day per goal,
+    ///   this happens on the last day's log, so "Well done!" shows right away.
+    ///   The 32-hour rule only resets the streak number; it doesn't decide the result.
+    /// - `.missed` at midnight after the last day if not every day was logged.
     /// - `.inProgress` otherwise.
     func outcome(now: Date = .now) -> GoalOutcome {
         guard let goal = data.goal else { return .inProgress }
 
-        if streakCount + freezesUsed >= goal.dayCount(calendar: calendar) {
+        if loggedDaysInGoal >= goal.dayCount(calendar: calendar) {
             return .completed
         }
         return goal.hasEnded(at: now, calendar: calendar) ? .missed : .inProgress
@@ -142,6 +154,14 @@ final class LearningStore {
         data.streakStartDate = checkDate
         save()
     }
+
+    #if DEBUG
+    /// DEBUG: time travel — wipes everything so the app starts again at Onboarding.
+    func eraseAllData() {
+        data = AppData()
+        save()
+    }
+    #endif
 
     // MARK: - Private helpers
 

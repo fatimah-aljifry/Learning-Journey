@@ -6,7 +6,7 @@
 import Foundation
 
 /// One logged day. There is at most one log per calendar day *per goal*, so a day can have
-/// two logs if the goal was updated in between (the Calendar shows learned over frozen).
+/// two logs if the goal was updated in between (the Calendar shows the most recent one).
 struct DayLog: Codable, Equatable, Identifiable {
     /// The start of the day this log belongs to (used by the Calendar and week strip).
     let day: Date

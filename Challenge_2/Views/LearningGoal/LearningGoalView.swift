@@ -48,6 +48,8 @@ struct LearningGoalView: View {
                 }
                 // Also off while the warning is showing, so it can't be tapped twice.
                 .disabled(!viewModel.canSave || viewModel.showUpdateAlert)
+                // Orange ✓ even though the navigation (back button) is tinted white.
+                .tint(.orange)
             }
         }
         // Custom warning (matches the hi-fi) shown on top of the page.
@@ -76,10 +78,13 @@ struct LearningGoalView: View {
     .tint(.orange)
 }
 
+
+
+
 #Preview("Filled in") {
     let viewModel = LearningGoalViewModel()
     viewModel.topic = "Design"
-    viewModel.selectedDuration = .month
+    viewModel.selectedDuration = .week
     return NavigationStack {
         LearningGoalView(viewModel: viewModel)
     }

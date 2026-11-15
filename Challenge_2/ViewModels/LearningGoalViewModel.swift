@@ -38,6 +38,6 @@ final class LearningGoalViewModel {
     /// The store resets the streak and freezes, keeps today's learned log and removes today's freeze.
     func confirmUpdate(in store: LearningStore) {
         guard canSave, let selectedDuration else { return }
-        store.updateGoal(topic: topic, duration: selectedDuration)
+        store.updateGoal(topic: topic, duration: selectedDuration, now: AppClock.shared.now)
     }
 }

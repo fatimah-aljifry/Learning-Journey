@@ -23,10 +23,11 @@ final class CalendarViewModel {
     @ObservationIgnored private let store: LearningStore
     @ObservationIgnored private let calendar: Calendar
 
-    init(store: LearningStore, calendar: Calendar = .current, now: Date = .now) {
+    /// `now` is only passed by tests; the app uses `AppClock.shared.now`.
+    init(store: LearningStore, calendar: Calendar = .current, now: Date? = nil) {
         self.store = store
         self.calendar = calendar
-        self.now = now
+        self.now = now ?? AppClock.shared.now
 
         // Start at the registration month and load up to 12 months past the current one.
         var month = firstMonth
@@ -70,7 +71,7 @@ final class CalendarViewModel {
         return blanks + days
     }
 
-    /// How a day is colored (learned wins over frozen).
+    /// How a day is colored (the most recent log of that day).
     func status(for date: Date) -> DayStatus? {
         store.status(for: date)
     }

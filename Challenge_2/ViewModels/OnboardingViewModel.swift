@@ -23,6 +23,6 @@ final class OnboardingViewModel {
     /// Saves the first goal and the registration date.
     func startLearning(in store: LearningStore) {
         guard canStart, let selectedDuration else { return }
-        store.startGoal(topic: topic, duration: selectedDuration)
+        store.startGoal(topic: topic, duration: selectedDuration, now: AppClock.shared.now)
     }
 }
