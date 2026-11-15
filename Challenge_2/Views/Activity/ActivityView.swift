@@ -67,12 +67,8 @@ struct ActivityView: View {
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
-                // The title isn't shown (icon only) but VoiceOver reads it.
-                Button("Edit learning goal", systemImage: "pencil.and.outline", action: onEditGoal)
-                    .modifier(HeaderIconStyle())
-
-                Button("Calendar", systemImage: "calendar", action: onOpenCalendar)
-                    .modifier(HeaderIconStyle())
+                HeaderIconButton(title: "Edit learning goal", systemImage: "pencil.and.outline", action: onEditGoal)
+                HeaderIconButton(title: "Calendar", systemImage: "calendar", action: onOpenCalendar)
             }
 
             Text(viewModel.headerDate)
@@ -118,19 +114,6 @@ struct ActivityView: View {
         }
     }
 
-}
-
-/// Shared look for the two round glass buttons in the header.
-private struct HeaderIconStyle: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .labelStyle(.iconOnly)
-            .font(.system(size: 24, weight: .bold))
-            .foregroundStyle(.white)
-            .buttonStyle(.glass)
-            .buttonBorderShape(.circle)
-            .controlSize(.large)
-    }
 }
 
 // MARK: - Previews
