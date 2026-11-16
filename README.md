@@ -1,5 +1,5 @@
 <h1>
-  <img src="Images/AppIcon-1.png" alt="Learning Journey app icon" width="60" height="55" align="absmiddle">
+  <img src="Images/AppIcon-1.png" alt="Learning Journey app icon" width="60" height="75" align="absmiddle">
   Learning Journey
 </h1>
 
