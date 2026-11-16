@@ -1,4 +1,7 @@
-# Learning Journey
+<h1>
+  <img src="Images/AppIcon-1.png" alt="Learning Journey app icon" width="48" height="48" align="absmiddle">
+  Learning Journey
+</h1>
 
 Learning Journey is an iOS app that helps you build a daily learning habit. Set a learning goal, log every day you learn, and keep your streak alive, with freezes for the days you can't.
 
