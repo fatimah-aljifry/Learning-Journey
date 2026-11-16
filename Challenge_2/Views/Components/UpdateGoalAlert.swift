@@ -71,6 +71,6 @@ private struct AlertButtonStyle: ButtonStyle {
 
 #Preview {
     UpdateGoalAlert(onDismiss: {}, onUpdate: {})
-        .background(.black)
-        .preferredColorScheme(.dark)
+      //  .background(.black)
+       // .preferredColorScheme(.dark)
 }

@@ -2,7 +2,6 @@
 //  LearningGoalView.swift
 //  Challenge_2
 //
-
 import SwiftUI
 
 /// Lets the user change their learning goal. Opened from the ✎ button or "Set a goal" on Activity.
@@ -23,6 +22,8 @@ struct LearningGoalView: View {
                 .foregroundStyle(.white)
 
             GoalTextField(text: $viewModel.topic)
+                // Orange blinking cursor (the cursor follows the tint).
+                .tint(.orange)
                 .padding(.bottom, 24)
 
             Text("I want to learn it in a")
@@ -69,17 +70,20 @@ struct LearningGoalView: View {
     }
 }
 
+// MARK: - Previews
+
 #Preview("Empty") {
-    NavigationStack {
-        LearningGoalView()
+    let viewModel = LearningGoalViewModel()
+    // Default value so the picker always has a valid selection.
+    viewModel.selectedDuration = .week
+    // viewModel.topic = "Design"   // uncomment to prefill the text field too
+    return NavigationStack {
+        LearningGoalView(viewModel: viewModel)
     }
     .environment(LearningStore(defaults: UserDefaults(suiteName: "preview") ?? .standard))
-    .preferredColorScheme(.dark)
+  //  .preferredColorScheme(.dark)
     .tint(.orange)
 }
-
-
-
 
 #Preview("Filled in") {
     let viewModel = LearningGoalViewModel()
@@ -89,19 +93,19 @@ struct LearningGoalView: View {
         LearningGoalView(viewModel: viewModel)
     }
     .environment(LearningStore(defaults: UserDefaults(suiteName: "preview") ?? .standard))
-    .preferredColorScheme(.dark)
+  //  .preferredColorScheme(.dark)
     .tint(.orange)
 }
 
 #Preview("Update alert") {
     let viewModel = LearningGoalViewModel()
     viewModel.topic = "Design"
-    viewModel.selectedDuration = .month
+    viewModel.selectedDuration = .week
     viewModel.showUpdateAlert = true
     return NavigationStack {
         LearningGoalView(viewModel: viewModel)
     }
     .environment(LearningStore(defaults: UserDefaults(suiteName: "preview") ?? .standard))
-    .preferredColorScheme(.dark)
+   // .preferredColorScheme(.dark)
     .tint(.orange)
 }

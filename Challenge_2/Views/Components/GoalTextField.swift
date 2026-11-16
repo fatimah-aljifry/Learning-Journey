@@ -18,6 +18,8 @@ struct GoalTextField: View {
         )
         .font(.title3)
         .foregroundStyle(.white)
+        // Orange blinking cursor (and text selection), even inside a white-tinted navigation stack.
+        .tint(.orange)
         .padding(.vertical, 8)
         .overlay(alignment: .bottom) {
             Rectangle()
@@ -31,5 +33,5 @@ struct GoalTextField: View {
     @Previewable @State var text = ""
     GoalTextField(text: $text)
         .padding()
-        .background(.black)
+      //  .background(.black)
 }

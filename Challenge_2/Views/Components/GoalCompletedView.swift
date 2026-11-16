@@ -58,12 +58,12 @@ struct GoalCompletedView: View {
 
 #Preview("Completed") {
     GoalCompletedView(outcome: .completed) {}
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.black)
+      //  .frame(maxWidth: .infinity, maxHeight: .infinity)
+     //   .background(.black)
 }
 
 #Preview("Missed") {
     GoalCompletedView(outcome: .missed) {}
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.black)
+     //   .frame(maxWidth: .infinity, maxHeight: .infinity)
+    //    .background(.black)
 }

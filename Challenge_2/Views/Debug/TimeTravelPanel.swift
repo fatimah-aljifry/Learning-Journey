@@ -95,6 +95,6 @@ struct TimeTravelPanel: View {
 #Preview {
     TimeTravelPanel()
         .environment(LearningStore(defaults: UserDefaults(suiteName: "preview-timetravel") ?? .standard))
-        .preferredColorScheme(.dark)
+       // .preferredColorScheme(.dark)
 }
 #endif

@@ -13,8 +13,8 @@ import Observation
 final class LearningGoalViewModel {
     /// Starts empty every time the page opens.
     var topic = ""
-    /// Starts with nothing picked.
-    var selectedDuration: GoalDuration?
+    /// Starts with week as default
+    var selectedDuration: GoalDuration? = .week
     /// `true` shows the "Update goal" alert.
     var showUpdateAlert = false
 

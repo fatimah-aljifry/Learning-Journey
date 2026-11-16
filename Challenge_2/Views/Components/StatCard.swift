@@ -45,6 +45,6 @@ struct StatCard: View {
         StatCard(systemImage: "snowflake", tint: .cyan, value: "1 day", label: "Freezed")
     }
     .padding()
-    .background(.black)
-    .preferredColorScheme(.dark)
+  //  .background(.black)
+  //  .preferredColorScheme(.dark)
 }

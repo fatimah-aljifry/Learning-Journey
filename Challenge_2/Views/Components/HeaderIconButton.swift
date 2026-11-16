@@ -29,6 +29,6 @@ struct HeaderIconButton: View {
         HeaderIconButton(title: "Calendar", systemImage: "calendar") {}
     }
     .padding()
-    .background(.black)
-    .preferredColorScheme(.dark)
+    //.background(.black)
+   // .preferredColorScheme(.dark)
 }

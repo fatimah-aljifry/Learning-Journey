@@ -74,7 +74,7 @@ private func previewCalendar(_ name: String, registeredMonthsAgo monthsAgo: Int)
     NavigationStack {
         CalendarView(viewModel: previewCalendar("history", registeredMonthsAgo: 3))
     }
-    .preferredColorScheme(.dark)
+   // .preferredColorScheme(.dark)
     .tint(.orange)
 }
 
@@ -82,6 +82,6 @@ private func previewCalendar(_ name: String, registeredMonthsAgo monthsAgo: Int)
     NavigationStack {
         CalendarView(viewModel: previewCalendar("new", registeredMonthsAgo: 0))
     }
-    .preferredColorScheme(.dark)
+   // .preferredColorScheme(.dark)
     .tint(.orange)
 }

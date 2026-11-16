@@ -36,8 +36,8 @@ struct ActivityView: View {
         }
         .padding(.horizontal, 16)
         // Fill the whole screen, then paint it black (extends behind the status bar automatically).
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.black)
+        //.frame(maxWidth: .infinity, maxHeight: .infinity)
+       // .background(.black)
         // Keeps the screen current while it's open: refreshes now, then sleeps until
         // the next midnight or streak deadline, wakes up, refreshes again, and repeats.
         // `id:` restarts the loop right away if the app clock is moved (DEBUG: time travel).
@@ -63,7 +63,7 @@ struct ActivityView: View {
         VStack(spacing: 4) {
             HStack {
                 Text("Activity")
-                    .foregroundStyle(.white)
+                   // .foregroundStyle(.white)
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -153,26 +153,26 @@ private func previewViewModel(
 
 #Preview("Logged today") {
     ActivityView(viewModel: previewViewModel("logged", startedDaysAgo: 2, logs: [(2, .learned), (1, .learned), (0, .learned)]))
-        .preferredColorScheme(.dark)
+   //     .preferredColorScheme(.dark)
 }
 
 #Preview("Frozen today") {
     ActivityView(viewModel: previewViewModel("frozen", startedDaysAgo: 1, logs: [(1, .learned), (0, .frozen)]))
-        .preferredColorScheme(.dark)
+      //  .preferredColorScheme(.dark)
 }
 
 #Preview("All freezes used") {
     ActivityView(viewModel: previewViewModel("noFreezes", startedDaysAgo: 2, logs: [(2, .frozen), (1, .frozen)]))
-        .preferredColorScheme(.dark)
+       // .preferredColorScheme(.dark)
 }
 
 #Preview("Well done") {
     // Oldest day first, the same order a real user would log in.
     ActivityView(viewModel: previewViewModel("done", startedDaysAgo: 6, logs: (0...6).reversed().map { ($0, .learned) }))
-        .preferredColorScheme(.dark)
+       // .preferredColorScheme(.dark)
 }
 
 #Preview("Goal not reached") {
     ActivityView(viewModel: previewViewModel("missed", startedDaysAgo: 8, logs: [(8, .learned), (7, .learned)]))
-        .preferredColorScheme(.dark)
+  //      .preferredColorScheme(.dark)
 }

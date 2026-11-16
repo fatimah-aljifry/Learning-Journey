@@ -38,6 +38,6 @@ struct DurationPicker: View {
         DurationPicker(selection: $selection)
         DurationPicker(selection: .constant(nil))
     }
-    .padding()
-    .background(.black)
+    //.padding()
+  //  .background(.black)
 }

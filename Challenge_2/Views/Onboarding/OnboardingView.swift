@@ -21,11 +21,11 @@ struct OnboardingView: View {
 
             HStack {
                 Text("Hello")
-                    .foregroundStyle(.white)
+                  //  .foregroundStyle(.white)
                     .font(.largeTitle)
 
                 Text("Learner")
-                    .foregroundStyle(.white)
+              //      .foregroundStyle(.white)
                     .font(.largeTitle)
                     .fontWeight(.bold)
             }
@@ -40,7 +40,7 @@ struct OnboardingView: View {
 
             Text("I want to learn")
                 .font(.default)
-                .foregroundStyle(.white)
+               // .foregroundStyle(.white)
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -79,5 +79,5 @@ struct OnboardingView: View {
     // A throwaway store so the preview never touches the app's real saved data.
     OnboardingView()
         .environment(LearningStore(defaults: UserDefaults(suiteName: "preview") ?? .standard))
-        .preferredColorScheme(.dark)
+     //   .preferredColorScheme(.dark)
 }

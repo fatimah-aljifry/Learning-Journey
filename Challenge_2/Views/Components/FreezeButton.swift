@@ -43,5 +43,5 @@ struct FreezeButton: View {
         FreezeButton(todayStatus: nil, freezesRemaining: 0) {}      // all freezes used
     }
     .padding()
-    .background(.black)
+   // .background(.black)
 }

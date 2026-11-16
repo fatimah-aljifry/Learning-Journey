@@ -62,5 +62,5 @@ struct LogButton: View {
         LogButton(state: .logged) {}
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .background(.black)
+  //  .background(.black)
 }

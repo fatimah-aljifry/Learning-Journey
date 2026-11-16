@@ -50,5 +50,5 @@ struct WeekStripView: View {
         }
     }
     .padding()
-    .background(.black)
+  //  .background(.black)
 }

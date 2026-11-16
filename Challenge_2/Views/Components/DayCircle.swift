@@ -57,7 +57,8 @@ struct DayCircle: View {
         DayCircle(date: .now, status: nil, isToday: true)
         DayCircle(date: .now, status: .learned, isToday: false)
         DayCircle(date: .now, status: .frozen, isToday: false)
+           // .preferredColorScheme(.dark)
     }
     .padding()
-    .background(.black)
+   // .background(.black)
 }
