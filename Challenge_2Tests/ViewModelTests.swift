@@ -65,24 +65,30 @@ struct ViewModelTests {
         #expect(viewModel.canStart)
     }
 
-    @Test func learningGoalPageStartsEmptyAndNeedsBothFields() {
+    @Test func learningGoalPageStartsWithWeekAndNeedsATopic() {
         let viewModel = LearningGoalViewModel()
-        #expect(viewModel.topic.isEmpty && viewModel.selectedDuration == nil)
-        #expect(!viewModel.canSave)
-
-        viewModel.topic = "Design"
-        #expect(!viewModel.canSave)
+        #expect(viewModel.topic.isEmpty && viewModel.selectedDuration == .week)
+        #expect(!viewModel.canSave)                    // empty topic → ✓ disabled
 
         viewModel.requestSave()
         #expect(!viewModel.showUpdateAlert)            // ✓ disabled → no warning
 
-        viewModel.selectedDuration = .month
+        viewModel.topic = "Design"
+        #expect(viewModel.canSave)                     // topic filled + default week → enabled
+
         viewModel.requestSave()
         #expect(viewModel.showUpdateAlert)             // warning always shows
 
         viewModel.cancelUpdate()
         #expect(!viewModel.showUpdateAlert)
         #expect(viewModel.topic == "Design")           // Dismiss keeps what was typed
+        #expect(viewModel.selectedDuration == .week)   // duration unchanged
+
+        viewModel.selectedDuration = .month
+        #expect(viewModel.canSave)                     // changing the duration still allows saving
+
+        viewModel.requestSave()
+        #expect(viewModel.showUpdateAlert)
     }
 
     // MARK: - Calendar

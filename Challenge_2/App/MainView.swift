@@ -59,5 +59,5 @@ struct MainView: View {
     store.log(.learned, now: .now.addingTimeInterval(-86_000))
     return MainView(store: store)
         .environment(store)
-        .preferredColorScheme(.dark)
+     //   .preferredColorScheme(.dark)
 }

@@ -24,6 +24,6 @@ struct ContentView: View {
 #Preview("First launch") {
     ContentView()
         .environment(LearningStore(defaults: UserDefaults(suiteName: "preview-content") ?? .standard))
-        .preferredColorScheme(.dark)
+       // .preferredColorScheme(.dark)
         .tint(.orange)
 }
