@@ -69,9 +69,7 @@ struct OnboardingView: View {
             Text("You can edit your desire later")
                 .foregroundStyle(.gray)
         }
-        // Fill the whole screen, then paint it black (extends behind the status bar automatically).
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.black)
+        .padding(.horizontal, 20)   // small side margin
     }
 }
 
