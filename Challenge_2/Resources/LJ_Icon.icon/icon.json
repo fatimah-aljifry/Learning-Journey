@@ -3,9 +3,7 @@
     "refractivity",
     "specular-location"
   ],
-  "fill" : {
-    "solid" : "extended-gray:1.00000,1.00000"
-  },
+  "fill" : "system-dark",
   "groups" : [
     {
       "blur-material" : 0.35,

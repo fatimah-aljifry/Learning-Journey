@@ -148,7 +148,7 @@ private func previewViewModel(
 
 #Preview("Ready to log") {
     ActivityView(viewModel: previewViewModel("ready", startedDaysAgo: 2, logs: [(2, .learned), (1, .frozen)]))
-        .preferredColorScheme(.dark)
+      //  .preferredColorScheme(.dark)
 }
 
 #Preview("Logged today") {
